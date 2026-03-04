@@ -14,15 +14,18 @@ export default function App() {
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
     console.log('Supabase Config Check:', { 
-      urlPresent: !!supabaseUrl, 
-      keyPresent: !!supabaseAnonKey,
+      url: supabaseUrl ? 'Configurada' : 'Faltante', 
+      key: supabaseAnonKey ? 'Configurada' : 'Faltante',
       isPlaceholder: supabaseUrl?.includes('your-project')
     });
 
     if (!supabaseUrl || !supabaseAnonKey || 
         supabaseUrl.includes('your-project') || 
         supabaseUrl === 'undefined' || 
-        supabaseAnonKey === 'undefined') {
+        supabaseAnonKey === 'undefined' ||
+        supabaseUrl === '' ||
+        supabaseAnonKey === '') {
+      console.error('ERROR: Variables de entorno de Supabase no detectadas.');
       setConfigMissing(true);
       setLoading(false);
       return;
