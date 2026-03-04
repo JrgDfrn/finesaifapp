@@ -13,7 +13,16 @@ export default function App() {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-    if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('your-project')) {
+    console.log('Supabase Config Check:', { 
+      urlPresent: !!supabaseUrl, 
+      keyPresent: !!supabaseAnonKey,
+      isPlaceholder: supabaseUrl?.includes('your-project')
+    });
+
+    if (!supabaseUrl || !supabaseAnonKey || 
+        supabaseUrl.includes('your-project') || 
+        supabaseUrl === 'undefined' || 
+        supabaseAnonKey === 'undefined') {
       setConfigMissing(true);
       setLoading(false);
       return;
