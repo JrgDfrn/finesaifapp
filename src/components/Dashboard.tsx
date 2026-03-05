@@ -24,7 +24,7 @@ export default function Dashboard() {
     const { data, error } = await supabase
       .from('transactions')
       .select('*')
-      .eq('user_id', userId)
+      .eq('id_user', userId)
       .order('created_at', { ascending: true });
 
     if (error) {
@@ -42,7 +42,7 @@ export default function Dashboard() {
       .from('transactions')
       .insert([{
         ...data,
-        user_id: user.id,
+        id_user: user.id,
         created_at: new Date().toISOString()
       }])
       .select()
